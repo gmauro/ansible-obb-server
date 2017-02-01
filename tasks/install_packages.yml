@@ -1,0 +1,20 @@
+- name: install general packages
+  apt: name={{ item }} state={{ packages_state }} update_cache=yes
+  with_items:
+    - git
+    - unzip
+    - wget
+    - python-dev
+    - python-imaging
+    - python-matplotlib
+    - python-numpy
+    - python-pip
+    - python-scipy
+    - python-tables
+    - python-virtualenv
+    - postgresql-contrib
+    - sudo
+    - supervisor
+#    - ice-services
+#    - python-zeroc-ice
+

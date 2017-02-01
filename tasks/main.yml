@@ -1,0 +1,10 @@
+- include: install_packages.yml
+  when: install_packages
+
+- include: add_user.yml
+  when: add_user
+
+- include: install_obb.yml
+  when: install_obb
+
+

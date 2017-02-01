@@ -1,0 +1,12 @@
+install_packages: yes
+add_user: yes
+install_obb: yes
+
+packages_state: present
+
+OMEROVERSION: v.4.4.12
+
+OMEROUSER: "{{ lookup('env', 'OMEROUSER') | default('omero',boolean=True) }}"
+OMEROGROUP: "{{ lookup('env', 'OMEROGROUP') | default('omero',boolean=True) }}"
+PASSWORD: romeo
+OMERODATADIR: /OMERO

@@ -1,0 +1,10 @@
+- name: create omero data dir
+  file: path={{ OMERODATADIR }} state=directory mode=0755 owner={{ OMEROUSER }} group={{ OMEROGROUP }}
+
+- name: clone git repo
+  become: yes
+  become_user: "{{ OMEROUSER }}"
+  git: repo=git://github.com/openmicroscopy/openmicroscopy.git \
+       dest=/home/{{ OMEROUSER }}/ome \
+       recursive=yes \
+       version={{ OMEROVERSION }}
