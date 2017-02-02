@@ -3,3 +3,7 @@
 
 - name: create omero user
   user: name={{ OMEROUSER }} password={{ PASSWORD }} update_password=always shell=/bin/bash home=/home/{{ OMEROUSER }} group={{ OMEROGROUP }}
+
+- name: create omero data dir
+  file: path={{ OMERODATADIR }} state=directory mode=0755 owner={{ OMEROUSER }} group={{ OMEROGROUP }}
+

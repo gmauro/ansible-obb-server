@@ -5,6 +5,11 @@
   when: add_user
 
 - include: install_obb.yml
+  become: yes
+  become_method: su
+  become_user: "{{ OMEROUSER }}"
   when: install_obb
 
+- include: config_supervisor.yml
+  when: config_supervisor
 

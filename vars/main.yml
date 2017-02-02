@@ -1,12 +1,25 @@
 install_packages: yes
 add_user: yes
 install_obb: yes
+config_supervisor: yes
 
 packages_state: present
 
 OMEROVERSION: v.4.4.12
+OMEROBIOBANKVERSION: develop
 
 OMEROUSER: "{{ lookup('env', 'OMEROUSER') | default('omero',boolean=True) }}"
 OMEROGROUP: "{{ lookup('env', 'OMEROGROUP') | default('omero',boolean=True) }}"
 PASSWORD: romeo
+
 OMERODATADIR: /OMERO
+OMERODIR: /home/{{ OMEROUSER }}/ome
+OMEROBIOBANKDIR: /home/{{ OMEROUSER }}/omero.biobank
+
+OMERODBHOST: "{{ lookup('env', 'OMERODBHOST') | default('dbserver',boolean=True) }}"
+OMERODBNAME: "{{ lookup('env', 'OMERODBNAME') | default('omero',boolean=True) }}"
+OMERODBUSER: "{{ lookup('env', 'OMERODBUSER') | default('omero',boolean=True) }}"
+OMERODBPASS: romeo
+
+SUPERVISORLOGDIR: /var/log/supervisor
+SUPERVISOROMEROSCRIPT: /omero

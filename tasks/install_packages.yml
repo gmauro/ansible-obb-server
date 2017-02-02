@@ -1,4 +1,4 @@
-- name: install general packages
+- name: install obb required packages
   apt: name={{ item }} state={{ packages_state }} update_cache=yes
   with_items:
     - git
@@ -13,8 +13,5 @@
     - python-tables
     - python-virtualenv
     - postgresql-contrib
-    - sudo
     - supervisor
-#    - ice-services
-#    - python-zeroc-ice
 

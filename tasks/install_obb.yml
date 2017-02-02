@@ -1,10 +1,63 @@
-- name: create omero data dir
-  file: path={{ OMERODATADIR }} state=directory mode=0755 owner={{ OMEROUSER }} group={{ OMEROGROUP }}
-
-- name: clone git repo
-  become: yes
-  become_user: "{{ OMEROUSER }}"
+- name: clone openmicroscopy git repo
   git: repo=git://github.com/openmicroscopy/openmicroscopy.git \
-       dest=/home/{{ OMEROUSER }}/ome \
+       dest={{ OMERODIR }} \
        recursive=yes \
        version={{ OMEROVERSION }}
+       force=yes
+
+- name: clone omero.biobank git repo
+  git: repo=git://github.com/crs4/omero.biobank \
+       dest={{ OMEROBIOBANKDIR }} \
+       version={{ OMEROBIOBANKVERSION }}
+
+- name: copy the custom model files to OMERO's model repository
+  command: 'cp "{{ OMEROBIOBANKDIR }}/models/{{ item }}.ome.xml" {{ OMERODIR }}/components/model/resources/mappings/'
+  with_items:
+     - 'actions'
+     - 'affymetrix_chips'
+     - 'collection'
+     - 'data_sample'
+     - 'illumina_chips'
+     - 'individual'
+     - 'locations'
+     - 'sequencing'
+     - 'variant_call_support'
+     - 'vessel'
+
+- name: patching the omero.version property
+  command: "{{ OMEROBIOBANKDIR }}/utils/patch_ome_config --ome-home {{ OMERODIR }} --models-repository {{ OMEROBIOBANKDIR }}/models/"
+
+- name: disable Neo4j and RabbitMQ support
+  lineinfile: dest={{ OMERODIR }}/etc/omero.properties \
+              line={{ item }}
+  with_items:
+     - 'omero.biobank.graph.engine=pygraph'
+     - 'omero.biobank.messages_queue.enabled=False'
+
+- name: set java options
+  replace: dest={{ OMERODIR }}/build.py \
+           regexp='-Djavac.maxmem.default=750M'  \
+           replace='-Djavac.maxmem.default=1024M'
+
+- name: set exec mode
+  file: dest={{ OMERODIR }}/build.py \
+        mode="a+x"
+
+- name: Build the server
+  command: "{{ OMERODIR }}/build.py"
+
+- name: Build the DB schema from hibernate classes
+  command: "{{ OMERODIR }}/build.py build-schema -Domero.db.dialect=org.hibernate.dialect.PostgreSQLDialect"
+
+- name: set omero configuration
+  command: "{{ OMERODIR }}/dist/bin/omero config set {{ item }}"
+  with_items:
+     - "omero.data.dir {{ OMERODATADIR }}"
+     - "omero.db.host {{ OMERODBHOST }}"
+     - "omero.db.name {{ OMERODBNAME }}"
+     - "omero.db.user {{ OMERODBUSER }}"
+     - "omero.db.pass {{ OMERODBPASS }}"
+
+- name: Generate the SQL code to initialize the DB
+  command: "{{ OMERODIR }}/dist/bin/omero db script -f {{ OMERODIR }}/etc/omero_db.sql '' '' {{ PASSWORD }}"
+

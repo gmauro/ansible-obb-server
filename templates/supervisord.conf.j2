@@ -1,0 +1,12 @@
+[supervisord]
+user=root
+nodaemon=true
+directory={{ SUPERVISORLOGDIR }}
+childlogdir={{ SUPERVISORLOGDIR }}
+logfile=supervisord.log
+
+[program:omero]
+command={{ SUPERVISOROMEROSCRIPT }}
+autostart=true
+autorestart=true
+priority=100

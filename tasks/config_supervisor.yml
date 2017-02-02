@@ -1,0 +1,8 @@
+- name: Create supervisor log dir
+  file: path={{ SUPERVISORLOGDIR }} state=directory
+
+- name: copy supervisord conf file
+  template: src=supervisord.conf.j2 dest=/etc/supervisor/conf.d/supervisord.conf
+
+- name: copy supervisord omero script
+  template: src=omero.j2 dest={{ SUPERVISOROMEROSCRIPT }}
