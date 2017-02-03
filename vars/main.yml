@@ -5,7 +5,7 @@ config_supervisor: yes
 
 packages_state: present
 
-OMEROVERSION: v.4.4.12
+OMEROVERSION: v5.2.7
 OMEROBIOBANKVERSION: develop
 
 OMEROUSER: "{{ lookup('env', 'OMEROUSER') | default('omero',boolean=True) }}"

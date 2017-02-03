@@ -13,3 +13,4 @@
 - include: config_supervisor.yml
   when: config_supervisor
 
+- include: cleaning.yml
