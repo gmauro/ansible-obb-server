@@ -11,4 +11,4 @@ mkdir -p var/master
 mkdir -p var/registry
 chown -R {{ OMEROUSER }}:{{OMEROGROUP }} var
 
-exec su omero -c 'icegridnode --nochdir --Ice.Config=etc/internal.cfg,etc/master.cfg --deploy etc/grid/default.xml'
+exec su omero -c 'bin/omero/admin start'
