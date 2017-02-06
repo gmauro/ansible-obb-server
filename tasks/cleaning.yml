@@ -7,5 +7,3 @@
 - name: apt autoremove
   command: apt-get autoremove
 
-- name: clean /tmp
-  command: rm -rf /tmp
