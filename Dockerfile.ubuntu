@@ -9,4 +9,4 @@ ADD templates /tmp/roles/ansible-obb-server/templates
 
 RUN git clone https://github.com/gmauro/ansible-java /tmp/roles/ansible-java \
  && git clone https://github.com/gmauro/ansible-ice /tmp/roles/ansible-ice \
- && ansible-playbook -i localhost, local.yml -e "@vars/main.yml"
+ && ansible-playbook -i localhost, local.yml -e "@roles/ansible-obb-server/vars/main.yml"
