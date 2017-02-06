@@ -2,7 +2,7 @@ FROM gmauro/ansible:2.1-debian
 
 WORKDIR /tmp
 
-ADD local.yml /tmp/local.yml
+ADD docker.yml /tmp/local.yml
 ADD vars /tmp/roles/ansible-obb-server/vars
 ADD tasks /tmp/roles/ansible-obb-server/tasks
 ADD templates /tmp/roles/ansible-obb-server/templates
