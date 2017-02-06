@@ -6,3 +6,7 @@
 
 - name: copy supervisord omero script
   template: src=omero.j2 dest={{ SUPERVISOROMEROSCRIPT }}
+
+- name: set exec mode
+  file: dest={{ SUPERVISOROMEROSCRIPT }} \
+        mode="a+x"
