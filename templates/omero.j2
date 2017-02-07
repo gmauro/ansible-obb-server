@@ -11,4 +11,4 @@ mkdir -p var/master
 mkdir -p var/registry
 chown -R {{ OMEROUSER }}:{{OMEROGROUP }} var
 
-exec su omero -c 'bin/omero/admin start'
+exec su omero -c 'bin/omero admin start'
