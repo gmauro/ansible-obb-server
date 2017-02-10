@@ -16,7 +16,7 @@ OMERODATADIR: /OMERO
 OMERODIR: /home/{{ OMEROUSER }}/ome
 OMEROBIOBANKDIR: /home/{{ OMEROUSER }}/omero.biobank
 
-OMERODBHOST: "{{ lookup('env', 'OMERODBHOST') | default('dbserver',boolean=True) }}"
+OMERODBHOST: "{{ lookup('env', 'OMERODBHOST') | default('localhost',boolean=True) }}"
 OMERODBNAME: "{{ lookup('env', 'OMERODBNAME') | default('omero',boolean=True) }}"
 OMERODBUSER: "{{ lookup('env', 'OMERODBUSER') | default('omero',boolean=True) }}"
 OMERODBPASS: romeo

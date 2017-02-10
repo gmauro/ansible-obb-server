@@ -6,7 +6,7 @@
        force=yes
 
 - name: clone omero.biobank git repo
-  git: repo=git://github.com/crs4/omero.biobank \
+  git: repo=git://github.com/gmauro/omero.biobank \
        dest={{ OMEROBIOBANKDIR }} \
        version={{ OMEROBIOBANKVERSION }}
 
