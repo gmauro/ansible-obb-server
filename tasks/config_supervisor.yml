@@ -1,6 +1,24 @@
 - name: Create supervisor log dir
   file: path={{ SUPERVISORLOGDIR }} state=directory
 
+- name: remove unix_http_server section
+  ini_file: dest=/etc/supervisor/supervisord.conf \
+            section=unix_http_server \
+            state=absent
+
+- name: add inet_http_server section
+  ini_file: dest=/etc/supervisor/supervisord.conf \
+            section=inet_http_server \
+            option=port \
+            value=127.0.0.1:9001 \
+            state=present
+
+- name: remove supervisorctl option
+  ini_file: dest=/etc/supervisor/supervisord.conf \
+            section=supervisorctl \
+            option=serverurl \
+            state=absent
+
 - name: copy supervisord conf file
   template: src=supervisord.conf.j2 dest=/etc/supervisor/conf.d/supervisord.conf
 
