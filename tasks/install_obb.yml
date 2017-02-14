@@ -39,15 +39,15 @@
               line={{ item }}
   with_items:
      - 'omero.biobank.graph.engine=neo4j'
-     - 'omero.biobank.graph.uri=${NEO4J_SERVER_URI}'
-     - 'omero.biobank.graph.user=${NEO4J_USER}'
-     - 'omero.biobank.graph.password=${NEO4J_PASSWORD}'
+     - 'omero.biobank.graph.uri={{ NEO4J_SERVER_URI }}'
+     - 'omero.biobank.graph.user={{ NEO4J_USER }}'
+     - 'omero.biobank.graph.password={{ NEO4J_PASSWORD }}'
      - 'omero.biobank.messages_queue.enabled=True'
-     - 'omero.biobank.messages_queue.host=${RABBITMQ_SERVER_HOST}'
-     - 'omero.biobank.messages_queue.port=${RABBITMQ_SERVER_PORT}'
-     - 'omero.biobank.messages_queue.queue=${RABBITMQ_QUEUE_NAME}'
-     - 'omero.biobank.messages_queue.user=${RABBITMQ_USER}'
-     - 'omero.biobank.messages_queue.password=${RABBITMQ_PASSWORD}'
+     - 'omero.biobank.messages_queue.host={{ RABBITMQ_SERVER_HOST }}'
+     - 'omero.biobank.messages_queue.port={{ RABBITMQ_SERVER_PORT }}'
+     - 'omero.biobank.messages_queue.queue={{ RABBITMQ_QUEUE_NAME }}'
+     - 'omero.biobank.messages_queue.user={{ RABBITMQ_USER }}'
+     - 'omero.biobank.messages_queue.password={{ RABBITMQ_PASSWORD }}'
 
 - name: set java options
   replace: dest={{ OMERODIR }}/build.py \
