@@ -21,5 +21,16 @@ OMERODBNAME: "{{ lookup('env', 'OMERODBNAME') | default('omero',boolean=True) }}
 OMERODBUSER: "{{ lookup('env', 'OMERODBUSER') | default('omero',boolean=True) }}"
 OMERODBPASS: romeo
 
+NEO4J_SERVER_URI: "{{ lookup('env', 'NEO4J_SERVER_URI') | default('http://localhost:7474/db/data/',boolean=True) }}"
+NEO4J_USER: "{{ lookup('env', 'NEO4J_USER') | default('neo4j',boolean=True) }}"
+NEO4J_PASSWORD: "{{ lookup('env', 'NEO4J_PASSWORD') | default('neo4j',boolean=True) }}"
+
+RABBITMQ_SERVER_HOST: "{{ lookup('env', 'RABBITMQ_SERVER_HOST') | default('localhost',boolean=True) }}"
+RABBITMQ_SERVER_PORT: "{{ lookup('env', 'RABBITMQ_SERVER_PORT') | default('NONE', boolean=True) }}"
+RABBITMQ_QUEUE_NAME: "{{ lookup('env', 'RABBITMQ_QUEUE_NAME') | default('omero.biobank',boolean=True) }}"
+RABBITMQ_USER: "{{ lookup('env', 'RABBITMQ_USER') | default('guest', boolean=True) }}"
+RABBITMQ_PASSWORD: "{{ lookup('env', 'RABBITMQ_PASSWORD') | default('guest', boolean=True) }}"
+
+
 SUPERVISORLOGDIR: /var/log/supervisor
 SUPERVISOROMEROSCRIPT: /omero
